@@ -12,24 +12,13 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0" Name="MenuGrid">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Button Name="BlockMenu" Grid.Row="0">
+        <StackPanel Grid.Column="0" Name="Toolbar">
+            <Button Name="BlockMenu">
                 <Image Source="/Resources/ToolsIcon.png"/>
             </Button>
-            <Button Name="TileMenu" Content="Tiles" Grid.Row="1"/>
-            <Button Name="CameraMenu" Content="Cameras" Grid.Row="2"/>
-        </Grid>
+            <Button Name="TileMenu" Content="Tiles"/>
+            <Button Name="CameraMenu" Content="Cameras"/>
+        </StackPanel>
 
 
         <TextBox Name="Debug" Text="testing" Grid.Column="1" Foreground="Black" Background="White"/>
