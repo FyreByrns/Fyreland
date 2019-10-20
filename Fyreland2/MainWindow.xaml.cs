@@ -19,18 +19,26 @@ namespace Fyreland2 {
     /// </summary>
     public partial class MainWindow : Window {
         MultiGrid contentGrid;
+        Visibility toolVisibility = Visibility.Collapsed;
+        Visibility tileVisibility = Visibility.Collapsed;
+        Visibility cameraVisibility = Visibility.Collapsed;
 
         public MainWindow() {
             InitializeComponent();
 
-            contentGrid = new MultiGrid(100, 100, 20);
-            contentGrid.Background = Brushes.Transparent;
-            ContentSpace.MouseMove += ContentSpace_MouseMove;
+            ToolContainer.Visibility = toolVisibility;
+            TileContainer.Visibility = tileVisibility;
+            CameraContainer.Visibility = cameraVisibility;
+
+            contentGrid = new MultiGrid(100, 100, 20) {
+                Background = Brushes.Transparent
+            };
+            contentGrid.MouseMove += ContentSpace_MouseMove;
             ContentSpace.Children.Add(contentGrid);
         }
 
         private void ContentSpace_MouseMove(object sender, MouseEventArgs e) {
-            if(e.LeftButton == MouseButtonState.Pressed) {
+            if (e.LeftButton == MouseButtonState.Pressed) {
                 Point test = e.GetPosition(contentGrid);
                 int gridClickedX = (int)(test.X / contentGrid.Size);
                 int gridClickedY = (int)(test.Y / contentGrid.Size);
@@ -47,6 +55,31 @@ namespace Fyreland2 {
                 Grid.SetColumn(toAdd, gridClickedX);
                 Grid.SetRow(toAdd, gridClickedY);
             }
+        }
+
+        void HideTools() { }
+        void HideTiles() { }
+        void HideCameras() { }
+
+        private void ToolMenu_Click(object sender, RoutedEventArgs e) {
+            if (toolVisibility == Visibility.Collapsed) toolVisibility = Visibility.Visible;
+            else toolVisibility = Visibility.Collapsed;
+
+            ToolContainer.Visibility = toolVisibility;
+        }
+
+        private void TileMenu_Click(object sender, RoutedEventArgs e) {
+            if (tileVisibility == Visibility.Collapsed) tileVisibility = Visibility.Visible;
+            else tileVisibility = Visibility.Collapsed;
+
+            TileContainer.Visibility = tileVisibility;
+        }
+
+        private void CameraMenu_Click(object sender, RoutedEventArgs e) {
+            if (cameraVisibility == Visibility.Collapsed) cameraVisibility = Visibility.Visible;
+            else cameraVisibility = Visibility.Collapsed;
+
+            CameraContainer.Visibility = cameraVisibility;
         }
     }
 }

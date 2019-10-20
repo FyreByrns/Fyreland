@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Fyreland2"
         mc:Ignorable="d"
         Title="Fyreland Editor" Height="450" Width="800">
+
     <Grid Name="MainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="40"/>
@@ -13,18 +14,45 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0" Name="Toolbar">
-            <Button Name="BlockMenu">
+            <Button Name="ToolMenu" Click="ToolMenu_Click">
                 <Image Source="/Resources/ToolsIcon.png"/>
             </Button>
-            <Button Name="TileMenu" Content="Tiles"/>
-            <Button Name="CameraMenu" Content="Cameras"/>
+            <Button Name="TileMenu" Content="Tiles" Click="TileMenu_Click"/>
+            <Button Name="CameraMenu" Content="Cameras" Click="CameraMenu_Click"/>
         </StackPanel>
 
-
         <TextBox Name="Debug" Text="testing" Grid.Column="1" Foreground="Black" Background="White"/>
-
         <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Visible">
             <Grid Name="ContentSpace"/>
         </ScrollViewer>
+
+        <DockPanel Grid.Column="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Name ="ToolContainer" Grid.Column="1" Background="AntiqueWhite" DockPanel.Dock="Left">
+                    <StackPanel Name="ToolSelector">
+                        <RadioButton GroupName="Tool" Content="Ground" IsChecked="True"/>
+                        <RadioButton GroupName="Tool" Content="Ground Area"/>
+                        <RadioButton GroupName="Tool" Content="Air"/>
+                        <RadioButton GroupName="Tool" Content="Air Area"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Name ="TileContainer" Grid.Column="1" Background="AliceBlue" DockPanel.Dock="Left">
+                    <StackPanel Name="TileSelector">
+                        
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Name ="CameraContainer" Grid.Column="1" Background="BlanchedAlmond" DockPanel.Dock="Left">
+                    <StackPanel Name="CameraSelector">
+
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </DockPanel>
     </Grid>
 </Window>

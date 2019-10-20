@@ -16,16 +16,16 @@ namespace Fyreland2 {
         public MultiGrid(int rows, int columns, int size) {
             for (int i = 0; i < rows; i++) RowDefinitions.Add(new RowDefinition() { Height = new GridLength(size, GridUnitType.Pixel) });
             for (int i = 0; i < columns; i++) ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(size, GridUnitType.Pixel) });
-            for (int i = 0; i < rows; i++) for (int j = 0; j < columns; j++) {
-                    Border b = new Border() {
-                        BorderThickness = new Thickness(1),
-                        BorderBrush = Brushes.Black
-                    };
+            /*for (int i = 0; i < rows; i++) for (int j = 0; j < columns; j++) {
+            //        Border b = new Border() {
+            //            BorderThickness = new Thickness(1),
+            //            BorderBrush = Brushes.Black
+            //        };
 
-                    Children.Add(b);
-                    SetRow(b, i);
-                    SetColumn(b, j);
-                }
+            //        Children.Add(b);
+            //        SetRow(b, i);
+            //        SetColumn(b, j);
+                }*/
 
             Height = size * rows;
             Width = size * columns;
