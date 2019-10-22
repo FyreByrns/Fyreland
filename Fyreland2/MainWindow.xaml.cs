@@ -20,15 +20,11 @@ namespace Fyreland2 {
     public partial class MainWindow : Window {
         MultiGrid contentGrid;
         Visibility toolVisibility = Visibility.Collapsed;
-        Visibility tileVisibility = Visibility.Collapsed;
-        Visibility cameraVisibility = Visibility.Collapsed;
 
         public MainWindow() {
             InitializeComponent();
 
             ToolContainer.Visibility = toolVisibility;
-            TileContainer.Visibility = tileVisibility;
-            CameraContainer.Visibility = cameraVisibility;
 
             contentGrid = new MultiGrid(100, 100, 20) {
                 Background = Brushes.Transparent
@@ -69,17 +65,9 @@ namespace Fyreland2 {
         }
 
         private void TileMenu_Click(object sender, RoutedEventArgs e) {
-            if (tileVisibility == Visibility.Collapsed) tileVisibility = Visibility.Visible;
-            else tileVisibility = Visibility.Collapsed;
-
-            TileContainer.Visibility = tileVisibility;
         }
 
         private void CameraMenu_Click(object sender, RoutedEventArgs e) {
-            if (cameraVisibility == Visibility.Collapsed) cameraVisibility = Visibility.Visible;
-            else cameraVisibility = Visibility.Collapsed;
-
-            CameraContainer.Visibility = cameraVisibility;
         }
     }
 }

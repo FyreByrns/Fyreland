@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fyreland2"
         mc:Ignorable="d"
-        Title="Fyreland Editor" Height="450" Width="800">
+        Title="Fyreland Editor" Height="500" Width="800">
 
     <Grid Name="MainGrid">
         <Grid.ColumnDefinitions>
@@ -38,18 +38,6 @@
                         <RadioButton GroupName="Tool" Content="Ground Area"/>
                         <RadioButton GroupName="Tool" Content="Air"/>
                         <RadioButton GroupName="Tool" Content="Air Area"/>
-                    </StackPanel>
-                </StackPanel>
-
-                <StackPanel Name ="TileContainer" Grid.Column="1" Background="AliceBlue" DockPanel.Dock="Left">
-                    <StackPanel Name="TileSelector">
-                        
-                    </StackPanel>
-                </StackPanel>
-
-                <StackPanel Name ="CameraContainer" Grid.Column="1" Background="BlanchedAlmond" DockPanel.Dock="Left">
-                    <StackPanel Name="CameraSelector">
-
                     </StackPanel>
                 </StackPanel>
             </Grid>
