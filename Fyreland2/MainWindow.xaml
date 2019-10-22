@@ -22,25 +22,21 @@
         </StackPanel>
 
         <TextBox Name="Debug" Text="testing" Grid.Column="1" Foreground="Black" Background="White"/>
-        <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Visible">
-            <Grid Name="ContentSpace"/>
-        </ScrollViewer>
-
         <DockPanel Grid.Column="1">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
-                </Grid.ColumnDefinitions>
-
-                <StackPanel Name ="ToolContainer" Grid.Column="1" Background="AntiqueWhite" DockPanel.Dock="Left">
+            <DockPanel Grid.Column="1">
+                <StackPanel Name ="ToolContainer" Grid.Column="1" Background="White" DockPanel.Dock="Left">
                     <StackPanel Name="ToolSelector">
-                        <RadioButton GroupName="Tool" Content="Ground" IsChecked="True"/>
-                        <RadioButton GroupName="Tool" Content="Ground Area"/>
-                        <RadioButton GroupName="Tool" Content="Air"/>
-                        <RadioButton GroupName="Tool" Content="Air Area"/>
+                        <Label Content="Tool"/>
+                    </StackPanel>
+                    <StackPanel Name="ToolTypeSelector">
+                        <Label Content="Mode"/>
                     </StackPanel>
                 </StackPanel>
-            </Grid>
+            </DockPanel>
+
+            <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Visible" >
+                <Grid Name="ContentSpace"/>
+            </ScrollViewer>
         </DockPanel>
     </Grid>
 </Window>
