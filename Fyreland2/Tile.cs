@@ -16,6 +16,7 @@ namespace Fyreland2 {
 
     public class Tile : Panel {
         Grid iconGrid;
+        Shape shape;
         public TileInfo info;
 
         public static event TileClickedEventHandler MouseClick;
@@ -24,8 +25,6 @@ namespace Fyreland2 {
         public Point Location { get; private set; }
 
         public Tile(int x, int y) {
-            iconGrid = new Grid();
-            Children.Add(iconGrid);
             Location = new Point(x, y);
 
             Background = Brushes.Transparent;
@@ -36,10 +35,35 @@ namespace Fyreland2 {
             MouseDown += TileMouseMove;
         }
 
+        Shape inContentGrid;
         public void Update() {
-            if (info.isGround) Background = Brushes.Black;
-            if (info.isSlope) Background = Brushes.Blue;
+            if (inContentGrid != null) MainWindow.instance.contentGrid.Children.Remove(inContentGrid);
+            Background = Brushes.Transparent;
 
+            if (info.Empty) shape = null;
+            if (info.isGround) { shape = new Rectangle() { Fill = Brushes.Black }; }
+            if (info.isSlope) { shape = new Triangle() { Fill = Brushes.Black }; }
+            if (info.hasVerticalPole) {
+                if (info.isSlope) shape = new PoleVertSlope() { Fill = Brushes.Black };
+                else shape = new PoleVert() { Fill = Brushes.Black };
+            }
+            if (info.hasHorizontalPole) {
+                if (info.isSlope) shape = new PoleHorizSlope() { Fill = Brushes.Black };
+                else shape = new PoleHoriz() { Fill = Brushes.Black };
+            }
+            if (info.isSoft) shape = new Soft() { Fill = Brushes.Black };
+
+            if (shape != null) {
+                MainWindow.instance.contentGrid.Children.Add(shape);
+                shape.MouseEnter += TileMouseEnter;
+                shape.MouseLeave += TileMouseLeave;
+                shape.MouseMove += TileMouseMove;
+                inContentGrid = (Shape)MainWindow.instance.contentGrid.Children[MainWindow.instance.contentGrid.Children.Count - 1];
+
+                Grid.SetColumn(shape, (int)Location.X);
+                Grid.SetRow(shape, (int)Location.Y);
+            }
+            else MainWindow.instance.contentGrid.Children.Remove(inContentGrid);
         }
 
         private void TileMouseMove(object sender, System.Windows.Input.MouseEventArgs e) {
@@ -59,6 +83,8 @@ namespace Fyreland2 {
         }
 
         public struct TileInfo {
+            public bool Empty => !(isGround || isSlope || isPole || isSoft || isGlass || isWormGrass || hasShortcutEntrance || hasShortcutPip || hasHorizontalPole || hasVerticalPole);
+
             public bool isGround;
             public bool isSlope;
             public bool isPole;

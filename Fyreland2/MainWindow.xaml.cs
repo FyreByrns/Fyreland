@@ -19,19 +19,22 @@ namespace Fyreland2 {
     }
 
     public enum ToolType {
-        Single, Rect, OpenRect, Line, Circle, OpenCircle, AnotherToolMode
+        Single, Rect, OpenRect, Line, Circle, OpenCircle
     }
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
-        MultiGrid contentGrid;
+        public MultiGrid contentGrid;
         Visibility toolVisibility = Visibility.Collapsed;
         Tool tool = Tool.Ground;
         ToolType toolType = ToolType.Single;
 
+        public static MainWindow instance;
+
         public MainWindow() {
+            instance = this;
             InitializeComponent();
 
             ToolContainer.Visibility = toolVisibility;
@@ -61,6 +64,12 @@ namespace Fyreland2 {
                 ToolTypeSelector.Children.Add(rb);
             }
             ToolTypeSelector.Children.OfType<RadioButton>().FirstOrDefault().IsChecked = true;
+
+            MouseUp += MainWindow_MouseUp;
+        }
+
+        private void MainWindow_MouseUp(object sender, MouseButtonEventArgs e) {
+            //canRect = true;
         }
 
         private void ToolChecked(object sender, RoutedEventArgs e) {
@@ -71,27 +80,35 @@ namespace Fyreland2 {
             toolType = (ToolType)Enum.Parse(typeof(ToolType), (sender as RadioButton)?.Content.ToString());
         }
 
+        Point lastClick = new Point(-1, -1);
+        bool canRect = true;
         private void Tile_TileClickEvent(object sender, Tile.TileEventArgs e) {
             int gridClickedX = (int)e.tile.Location.X;
             int gridClickedY = (int)e.tile.Location.Y;
-            Debug.Text = $"{gridClickedX},{gridClickedY}";
-
-            //Rectangle toAdd = new Rectangle() {
-            //Fill = Brushes.Black,
-            //Width = contentGrid.Size,
-            //Height = contentGrid.Size
-            //};
-
-
-            //contentGrid.Children.Add(toAdd);
-            //Grid.SetColumn(toAdd, gridClickedX);
-            //Grid.SetRow(toAdd, gridClickedY);
 
             Tile clicked = e.tile;
 
             switch (toolType) {
-                case ToolType.Single: ToolAccordingToTile(ref e.tile.info); e.tile.Update(); break;
-                case ToolType.Rect: break;
+                case ToolType.Single:
+                    Debug.Text = $"{gridClickedX},{gridClickedY}";
+                    ToolAccordingToTile(ref e.tile.info); e.tile.Update();
+                    break;
+                case ToolType.Rect:
+                    Debug.Text = $"{canRect}";
+                    Debug.Text += $"To: {gridClickedX},{gridClickedY}";
+
+                    for (int i = (int)lastClick.X; i <= gridClickedX; i++)
+                        for (int j = (int)lastClick.Y; j <= gridClickedY; j++) {
+                            ToolAccordingToTile(ref contentGrid.tiles[j, i].info);
+                            contentGrid.tiles[j, i].Update();
+                        }
+
+                    lastClick = new Point(-1, -1);
+                    canRect = false;
+                    if (!canRect) {
+                        lastClick = new Point(-1, -1); canRect = true;
+                    }
+                    break;
                 case ToolType.OpenRect: break;
                 case ToolType.Line: break;
                 case ToolType.Circle: break;
@@ -99,6 +116,8 @@ namespace Fyreland2 {
 
                 default: break;
             }
+
+            lastClick = new Point(gridClickedX, gridClickedY);
         }
 
         void ToolAccordingToTile(ref Tile.TileInfo working) {
@@ -147,6 +166,9 @@ namespace Fyreland2 {
                     }
                 case Tool.Soft: {
                         working.isSoft = true;
+                        working.isGround = false;
+                        working.isGlass = false;
+                        working.isWormGrass = false;
                         break;
                     }
                 case Tool.Glass: {

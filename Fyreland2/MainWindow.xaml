@@ -11,7 +11,10 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="40"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0"/>
         </Grid.ColumnDefinitions>
+
+        <Image Grid.Column="2" Name ="SlopeIcon" Source="/Resources/Slope.png"/>
 
         <StackPanel Grid.Column="0" Name="Toolbar">
             <Button Name="ToolMenu" Click="ToolMenu_Click">
