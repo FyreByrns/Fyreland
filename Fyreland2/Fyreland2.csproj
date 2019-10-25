@@ -61,6 +61,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Renderer\LevelRenderer.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="Utils.cs" />
     <Page Include="MainWindow.xaml">
