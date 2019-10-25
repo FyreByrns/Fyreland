@@ -100,7 +100,7 @@ namespace Fyreland2 {
                     for (int i = (int)lastClick.X; i <= gridClickedX; i++)
                         for (int j = (int)lastClick.Y; j <= gridClickedY; j++) {
                             ToolAccordingToTile(ref contentGrid.tiles[j, i].info);
-                            contentGrid.tiles[j, i].Update();
+                            contentGrid.tiles[i, j].Update();
                         }
 
                     lastClick = new Point(-1, -1);
