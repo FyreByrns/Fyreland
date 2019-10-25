@@ -20,5 +20,14 @@ namespace Fyreland2.Renderer {
 
 
         }
+
+        static int GetBaseRed(int layer, float blackToWhite, bool lit) {
+            int tret = 1;
+            tret += layer * 10;
+
+
+
+            return tret + (lit ? 90 : 0);
+        }
     }
 }
