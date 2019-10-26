@@ -25,8 +25,8 @@ namespace Fyreland2 {
                     tiles[i, j] = tile;
 
                     Children.Add(tile);
-                    SetColumn(tile, i);
-                    SetRow(tile, j);
+                    SetRow(tile, i);
+                    SetColumn(tile, j);
                 }
 
             Height = size * rows;

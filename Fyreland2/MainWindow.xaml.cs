@@ -199,6 +199,10 @@ namespace Fyreland2 {
         }
 
         private void TileMenu_Click(object sender, RoutedEventArgs e) {
+            var renderer = new Renderer.LevelRenderer(contentGrid.tiles.GetLength(0), contentGrid.tiles.GetLength(1));
+            renderer.tiles[0] = contentGrid.tiles;
+
+            renderer.Render();
         }
 
         private void CameraMenu_Click(object sender, RoutedEventArgs e) {
