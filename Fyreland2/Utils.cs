@@ -13,5 +13,6 @@ using System.Windows.Media.Imaging;
 
 namespace Fyreland2 {
     public static class Utils {
+        public static int AsInt(this bool me) => me ? 1 : 0;
     }
 }
